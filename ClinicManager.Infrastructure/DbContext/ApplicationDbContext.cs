@@ -14,6 +14,8 @@ namespace ClinicManager.Infrastructure.DbContext
 
         }
 
+        public DbSet<Doctor> Doctors { get; set; } = null!;
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
