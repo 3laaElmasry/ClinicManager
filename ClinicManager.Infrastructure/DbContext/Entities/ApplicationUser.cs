@@ -1,15 +1,15 @@
 ﻿
 
 using Microsoft.AspNetCore.Identity;
-using System.Reflection;
+using ClinicManager.Core.Enums;
 
 namespace ClinicManager.Infrastructure.DbContext.Entities
 {
     public class ApplicationUser : IdentityUser<Guid>
     {
-        public Guid Id { get; set; }
         public string FullName { get; set; } = string.Empty;
         public DateTime DateOfBirth { get; set; }
+        public enGender Gender { get; set; }
         public string City { get; set; } = string.Empty;
         public string Country { get; set; } = string.Empty;
 
