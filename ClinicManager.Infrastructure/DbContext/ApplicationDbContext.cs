@@ -3,6 +3,7 @@
 using ClinicManager.Infrastructure.DbContext.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Net.Http.Headers;
 
 namespace ClinicManager.Infrastructure.DbContext
 {
@@ -20,6 +21,8 @@ namespace ClinicManager.Infrastructure.DbContext
         public DbSet<Appointment> Appointments { get; set; } = null!;
 
         public DbSet<Diagnosis> Diagnoses { get; set; } = null!;
+
+        public DbSet<Medication> Medications { get; set; } = null!;
 
 
 
