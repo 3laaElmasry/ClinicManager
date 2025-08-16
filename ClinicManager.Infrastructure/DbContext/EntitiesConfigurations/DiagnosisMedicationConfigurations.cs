@@ -3,6 +3,7 @@
 using ClinicManager.Infrastructure.DbContext.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 namespace ClinicManager.Infrastructure.DbContext.EntitiesConfigurations
 {
@@ -21,6 +22,13 @@ namespace ClinicManager.Infrastructure.DbContext.EntitiesConfigurations
                 .HasForeignKey(dm => dm.DiagnosisId)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasOne(dm => dm.Medication)
+                .WithMany()
+                .HasForeignKey(dm => dm.MedicationId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.NoAction);
+
         }
     }
 }
