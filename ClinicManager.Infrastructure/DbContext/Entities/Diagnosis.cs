@@ -18,5 +18,8 @@ namespace ClinicManager.Infrastructure.DbContext.Entities
         public Appointment Appointment { get; set; } = null!;
 
         public IEnumerable<DiagnosisMedication> Medications { get; set; } = null!;
+
+
+        public Invoice Invoice { get; set; } = null!;
     }
 }

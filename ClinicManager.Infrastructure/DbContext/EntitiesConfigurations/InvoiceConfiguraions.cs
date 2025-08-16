@@ -18,6 +18,13 @@ namespace ClinicManager.Infrastructure.DbContext.EntitiesConfigurations
 
             builder.Property(i => i.PaymentDate)
                 .IsRequired();
+
+
+            builder.HasOne(i => i.Diagnosis)
+                .WithOne(i => i.Invoice)
+                .HasForeignKey<Invoice>(i => i.DiagnosisId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
