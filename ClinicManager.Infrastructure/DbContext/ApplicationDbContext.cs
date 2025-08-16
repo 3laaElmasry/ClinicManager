@@ -27,6 +27,9 @@ namespace ClinicManager.Infrastructure.DbContext
         public DbSet<DiagnosisMedication> DiagnosisMedications {  get; set; } = null!;
 
 
+        public DbSet<Invoice> Invoices { get; set; } = null!;
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
