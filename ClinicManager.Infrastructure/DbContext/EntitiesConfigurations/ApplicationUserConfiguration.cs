@@ -6,7 +6,8 @@ public class ApplicationUserConfiguration : IEntityTypeConfiguration<Application
 {
     public void Configure(EntityTypeBuilder<ApplicationUser> builder)
     {
-     
+
+        builder.ToTable("ApplicationUsers");
         // FullName - Required + MaxLength
         builder.Property(u => u.FullName)
             .IsRequired()
