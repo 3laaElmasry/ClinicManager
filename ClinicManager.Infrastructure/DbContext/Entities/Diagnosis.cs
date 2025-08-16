@@ -16,5 +16,7 @@ namespace ClinicManager.Infrastructure.DbContext.Entities
         public Guid AppointmentId { get; set; }
 
         public Appointment Appointment { get; set; } = null!;
+
+        public IEnumerable<DiagnosisMedication> Medications { get; set; } = null!;
     }
 }

@@ -14,6 +14,13 @@ namespace ClinicManager.Infrastructure.DbContext.EntitiesConfigurations
 
             builder.Property(d => d.Quantity)
                 .IsRequired();
+
+
+            builder.HasOne(dm => dm.Diagnosis)
+                .WithMany(d => d.Medications)
+                .HasForeignKey(dm => dm.DiagnosisId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
