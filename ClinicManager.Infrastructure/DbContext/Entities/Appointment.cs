@@ -20,6 +20,8 @@ namespace ClinicManager.Infrastructure.DbContext.Entities
 
         public Doctor Doctor { get; set; } = null!;
         public Patient Patient { get; set; } = null!;
+
+        public IEnumerable<Diagnosis> Diagnoses { get; set; } = null!;
  
     }
 }
