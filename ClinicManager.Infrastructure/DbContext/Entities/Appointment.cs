@@ -15,8 +15,11 @@ namespace ClinicManager.Infrastructure.DbContext.Entities
         public string Notes { get; set; } = string.Empty;
 
         public Guid DoctorId { get; set; }
-         
+        public Guid PatientId { get; set; }
+
+
         public Doctor Doctor { get; set; } = null!;
+        public Patient Patient { get; set; } = null!;
  
     }
 }

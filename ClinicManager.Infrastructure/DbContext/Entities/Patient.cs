@@ -11,9 +11,12 @@ namespace ClinicManager.Infrastructure.DbContext.Entities
 
         public string MedicalRecordNumber { get; set; } = string.Empty;
         public string InsuranceProvider { get; set; } = string.Empty;  
-        public string InsuranceNumber { get; set; } = string.Empty;    
+        public string InsuranceNumber { get; set; } = string.Empty;
 
-      
+
+        public IEnumerable<Appointment> Appointments { get; set; } = null!;
+
+
     }
 
 }
