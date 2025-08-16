@@ -13,6 +13,10 @@ namespace ClinicManager.Infrastructure.DbContext.Entities
         public enAppointmentStatus Status { get; set; }
 
         public string Notes { get; set; } = string.Empty;
+
+        public Guid DoctorId { get; set; }
+         
+        public Doctor Doctor { get; set; } = null!;
  
     }
 }

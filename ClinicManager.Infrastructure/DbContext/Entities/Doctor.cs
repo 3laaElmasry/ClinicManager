@@ -11,6 +11,9 @@ namespace ClinicManager.Infrastructure.DbContext.Entities
         public ApplicationUser ApplicationUser { get; set; } = null!;
         public string LicenseNumber { get; set; } = string.Empty;
 
+
+        public IEnumerable<Appointment> Appointments { get; set; } = null!;
+
     }
 
 }
