@@ -24,6 +24,8 @@ namespace ClinicManager.Infrastructure.DbContext
 
         public DbSet<Medication> Medications { get; set; } = null!;
 
+        public DbSet<DiagnosisMedication> DiagnosisMedications {  get; set; } = null!;
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
