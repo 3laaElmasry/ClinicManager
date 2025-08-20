@@ -1,27 +1,31 @@
-﻿using ClinicManager.Infrastructure.DbContext.Entities;
+﻿using ClinicManager.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-public class DoctorConfiguration : IEntityTypeConfiguration<Doctor>
+
+namespace ClinicManager.Infrastructure.DbContext.EntitiesConfigurations
 {
-    public void Configure(EntityTypeBuilder<Doctor> builder)
+    public class DoctorConfiguration : IEntityTypeConfiguration<Doctor>
     {
-        
-        builder.ToTable("Doctors");
+        public void Configure(EntityTypeBuilder<Doctor> builder)
+        {
 
-        builder.HasKey(d => d.Id);
+            builder.ToTable("Doctors");
 
-        
-        builder.Property(d => d.LicenseNumber)
-            .HasMaxLength(50)
-            .IsRequired();
+            builder.HasKey(d => d.Id);
 
-       
-        builder.HasOne(d => d.ApplicationUser)
-            .WithOne()
-            .HasForeignKey<Doctor>(d => d.ApplicationUserId)
-            .OnDelete(DeleteBehavior.Cascade);
 
-      
+            builder.Property(d => d.LicenseNumber)
+                .HasMaxLength(50)
+                .IsRequired();
+
+
+            builder.HasOne(d => d.ApplicationUser)
+                .WithOne()
+                .HasForeignKey<Doctor>(d => d.ApplicationUserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+
+        }
     }
 }

@@ -1,6 +1,5 @@
 ﻿
-
-namespace ClinicManager.Infrastructure.DbContext.Entities
+namespace ClinicManager.Core.Entities
 {
     public class Doctor
     {

@@ -1,6 +1,6 @@
 ﻿
 
-using ClinicManager.Infrastructure.DbContext.Entities;
+using ClinicManager.Core.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Http.Headers;

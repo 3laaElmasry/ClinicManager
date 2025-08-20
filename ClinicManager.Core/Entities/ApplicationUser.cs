@@ -3,7 +3,7 @@
 using Microsoft.AspNetCore.Identity;
 using ClinicManager.Core.Enums;
 
-namespace ClinicManager.Infrastructure.DbContext.Entities
+namespace ClinicManager.Core.Entities
 {
     public class ApplicationUser : IdentityUser<Guid>
     {

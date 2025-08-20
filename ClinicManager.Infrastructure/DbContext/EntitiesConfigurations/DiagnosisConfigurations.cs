@@ -1,6 +1,4 @@
-﻿
-
-using ClinicManager.Infrastructure.DbContext.Entities;
+﻿using ClinicManager.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
