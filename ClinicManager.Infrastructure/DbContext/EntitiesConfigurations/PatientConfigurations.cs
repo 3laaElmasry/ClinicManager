@@ -19,13 +19,7 @@ namespace ClinicManager.Infrastructure.DbContext.EntitiesConfigurations
                    .OnDelete(DeleteBehavior.Cascade);
 
 
-            builder.Property(p => p.MedicalRecordNumber)
-                   .HasMaxLength(50)
-                   .IsRequired();
-
-
-            builder.Property(p => p.InsuranceProvider)
-                   .HasMaxLength(100);
+            
 
             
             builder.Property(p => p.InsuranceNumber)
