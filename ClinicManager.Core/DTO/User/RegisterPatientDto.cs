@@ -1,8 +1,10 @@
 ﻿
 
 using ClinicManager.Core.Common.Attriputes;
+using ClinicManager.Core.Entities;
 using ClinicManager.Core.Enums;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
 
 namespace ClinicManager.Core.DTO.User
 {
@@ -44,6 +46,12 @@ namespace ClinicManager.Core.DTO.User
         [StringLength(50)]
         public string? InsuranceName { get; set; }
 
+    }
+
+
+    public static class PatientExtenstions
+    {
+        public static ApplicationUser 
     }
 
 }
