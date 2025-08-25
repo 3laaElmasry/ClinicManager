@@ -13,7 +13,7 @@ namespace ClinicManager.API.Controllers
 
 
         [HttpPost("PatientRegister")]
-        public ActionResult<Result<ApplicationUser>> PatientRegisterAsync([FromBody] RegisterPatientDto model)
+        public ActionResult<Result<ApplicationUser>> PatientRegisterAsync([FromBody] RegisterPatient model)
         {
             return Ok();
         }

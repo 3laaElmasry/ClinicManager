@@ -18,9 +18,10 @@ namespace ClinicManager.Core.Services
             throw new NotImplementedException();
         }
 
-        public Task<AuthResult> PatinetRegister(RegisterPatientDto model)
+        public Task<AuthResult> PatinetRegister(RegisterPatient model)
         {
             throw new NotImplementedException();
+
         }
     }
 }

@@ -12,6 +12,6 @@ namespace ClinicManager.Core.ServiceContracts
 
         Task<AuthResult> Logout();
 
-        Task<AuthResult> PatinetRegister(RegisterPatientDto model);
+        Task<AuthResult> PatinetRegister(RegisterPatient model);
     }
 }

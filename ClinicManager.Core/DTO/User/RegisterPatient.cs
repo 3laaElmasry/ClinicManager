@@ -1,14 +1,14 @@
 ﻿
 
 using ClinicManager.Core.Common.Attriputes;
-using ClinicManager.Core.Entities;
+
 using ClinicManager.Core.Enums;
 using System.ComponentModel.DataAnnotations;
-using System.Runtime.CompilerServices;
+
 
 namespace ClinicManager.Core.DTO.User
 {
-    public class RegisterPatientDto
+    public class RegisterPatient
     {
 
 
@@ -47,8 +47,5 @@ namespace ClinicManager.Core.DTO.User
         public string? InsuranceName { get; set; }
 
     }
-
-
-   
 
 }
