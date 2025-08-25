@@ -49,9 +49,6 @@ namespace ClinicManager.Core.DTO.User
     }
 
 
-    public static class PatientExtenstions
-    {
-        public static ApplicationUser 
-    }
+   
 
 }
