@@ -6,6 +6,6 @@ namespace ClinicManager.Core.ServiceContracts
 {
     public interface IJwtTokenGenrator
     {
-        string GenrateToken(ApplicationUser user);
+        Task<string> GenrateToken(ApplicationUser user);
     }
 }
