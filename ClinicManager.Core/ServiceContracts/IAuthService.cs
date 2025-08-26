@@ -2,6 +2,7 @@
 
 using ClinicManager.Core.Common;
 using ClinicManager.Core.DTO.User;
+using ClinicManager.Core.Entities;
 
 
 namespace ClinicManager.Core.ServiceContracts
@@ -13,5 +14,7 @@ namespace ClinicManager.Core.ServiceContracts
         Task<AuthResult> Logout();
 
         Task<AuthResult> PatinetRegister(RegisterPatient model);
+
+        Task<ApplicationUser?> CreateUserAsync(RegisterModel model);
     }
 }

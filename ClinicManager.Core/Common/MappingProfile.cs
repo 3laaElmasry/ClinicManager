@@ -1,6 +1,7 @@
 ﻿
 using AutoMapper;
 using ClinicManager.Core.DTO.User;
+using ClinicManager.Core.Entities;
 
 namespace ClinicManager.Core.Common
 {
@@ -9,6 +10,8 @@ namespace ClinicManager.Core.Common
         public MappingProfile()
         {
             CreateMap<RegisterPatient, RegisterModel>();
+            CreateMap<RegisterModel, ApplicationUser>();
+
         }
     }
 }
