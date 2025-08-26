@@ -11,6 +11,7 @@ namespace ClinicManager.Core.Common
         {
             CreateMap<RegisterPatient, RegisterModel>();
             CreateMap<RegisterModel, ApplicationUser>();
+            CreateMap<RegisterPatient, Patient>();
 
         }
     }

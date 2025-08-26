@@ -7,6 +7,10 @@ using ClinicManager.Core.Common;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using ClinicManager.Core.RepositoryContracts;
+using ClinicManager.Infrastructure.Repositories;
+using ClinicManager.Core.ServiceContracts;
+using ClinicManager.Core.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -50,11 +54,15 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+
+
 builder.Services.AddAutoMapper(mc =>
 {
     mc.AddProfile(new MappingProfile());
 });
 
+
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 var app = builder.Build();
 
