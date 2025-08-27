@@ -5,7 +5,7 @@ using ClinicManager.Core.Common;
 using ClinicManager.Core.DTO.User;
 using ClinicManager.Core.Entities;
 using ClinicManager.Core.ServiceContracts;
-
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Identity;
 
 namespace ClinicManager.Core.Services
@@ -15,14 +15,17 @@ namespace ClinicManager.Core.Services
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IMapper _mapper;
         private readonly IJwtTokenGenrator _jwtTokenGenrator;
+        private readonly IPatientService _petientService;
         
         public AuthService(UserManager<ApplicationUser> userManager,
             IMapper mapper,
-            IJwtTokenGenrator jwtTokenGenrator)
+            IJwtTokenGenrator jwtTokenGenrator,
+            IPatientService patientService)
         {
             _userManager = userManager;
             _mapper = mapper;
             _jwtTokenGenrator = jwtTokenGenrator;
+            _petientService = patientService;
         }
 
         public async Task<ApplicationUser?> CreateUserAsync(RegisterModel model)
@@ -31,7 +34,7 @@ namespace ClinicManager.Core.Services
 
             var res = await _userManager.CreateAsync(user,model.Password);
 
-            return user;
+            return (res.Succeeded == true) ? user : null;
         }
 
         public Task<AuthResult> Login(LoginModel model)
@@ -44,7 +47,7 @@ namespace ClinicManager.Core.Services
             throw new NotImplementedException();
         }
 
-        public async Task<AuthResult> PatinetRegister(RegisterPatient model)
+        public async Task<AuthResult> PatinetRegisterAsync(RegisterPatient model)
         {
             var registerModel = _mapper.Map<RegisterModel>(model);
 
@@ -53,6 +56,14 @@ namespace ClinicManager.Core.Services
             if (user is not null)
             {
                 var token = await _jwtTokenGenrator.GenrateToken(user);
+
+                var patient = new Patient
+                {
+                    InsuranceName = model.InsuranceName,
+                    ApplicationUserId = user.Id
+
+                };
+                await _petientService.AddAsync(patient);
 
                 return new AuthResult
                 {

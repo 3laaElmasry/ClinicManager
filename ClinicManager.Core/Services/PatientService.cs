@@ -17,6 +17,7 @@ namespace ClinicManager.Core.Services
 
         public async Task<Patient> AddAsync(Patient entity)
         {
+            entity.Id = Guid.NewGuid();
             await _repository.AddAsync(entity);
             return entity;
         }

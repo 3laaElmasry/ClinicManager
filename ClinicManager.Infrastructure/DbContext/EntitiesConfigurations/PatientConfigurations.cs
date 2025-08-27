@@ -22,8 +22,9 @@ namespace ClinicManager.Infrastructure.DbContext.EntitiesConfigurations
             
 
             
-            builder.Property(p => p.InsuranceNumber)
-                   .HasMaxLength(50);
+            builder.Property(p => p.InsuranceName)
+                   .HasMaxLength(50)
+                   .IsRequired(false);
 
            
         }

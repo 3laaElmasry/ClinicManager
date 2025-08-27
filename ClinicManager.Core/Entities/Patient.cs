@@ -9,8 +9,8 @@ namespace ClinicManager.Core.Entities
         public Guid ApplicationUserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; } = null!;
 
-         
-        public string InsuranceNumber { get; set; } = string.Empty;
+
+        public string? InsuranceName { get; set; } = null;
 
 
         public IEnumerable<Appointment> Appointments { get; set; } = null!;
