@@ -62,7 +62,10 @@ builder.Services.AddAutoMapper(mc =>
 });
 
 
+builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+builder.Services.AddScoped<IPatientService, PatientService>();
 
 var app = builder.Build();
 
