@@ -20,7 +20,15 @@ builder.Services.AddDbContext<ApplicationDbContext>(otpions =>
     otpions.UseSqlServer(builder.Configuration.GetConnectionString("cs"));
 });
 
-builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
+builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(o =>
+{
+    o.Password.RequiredLength = 6;
+    o.Password.RequireDigit = true;
+    o.Password.RequireUppercase = true;
+    o.Password.RequireLowercase = true;
+    o.Password.RequireNonAlphanumeric = false;
+
+})
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
@@ -50,7 +58,7 @@ builder.Services.AddAuthentication(options =>
         ValidIssuer = builder.Configuration["Jwt:Issuer"],
         ValidAudience = builder.Configuration["Jwt:Audience"],
         IssuerSigningKey = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
+            Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Secret"]!))
     };
 });
 
@@ -69,6 +77,18 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IJwtTokenGenrator, JwtTokenGenrator>();
 builder.Services.AddScoped<IPatientService, PatientService>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
+
+
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -78,6 +98,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("AllowAll");
 
 app.UseAuthorization();
 

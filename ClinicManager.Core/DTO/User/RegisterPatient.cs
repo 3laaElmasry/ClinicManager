@@ -16,11 +16,11 @@ namespace ClinicManager.Core.DTO.User
         [StringLength(50,MinimumLength = 3, ErrorMessage = "Full Name must be between {1} and {0} characters")]
         public string FullName { get; set; } = string.Empty;
 
+        [DataType(DataType.Date)]
         [MinAge(6)]
         public DateTime DateOfBirth { get; set; }
 
         [Required(ErrorMessage = "Gender is required")]
-        [EnumDataType(typeof(enGender), ErrorMessage = "Gender must be either Male or Female.")]
         public enGender Gender { get; set; }
 
 
@@ -34,10 +34,11 @@ namespace ClinicManager.Core.DTO.User
         [EmailAddress]
         public string Email { get; set; } = string.Empty;
 
-        [RegularExpression(@"^(?=.*[A-Za-z])(?=.*\d).{6,}$",
-    ErrorMessage = "Password must contain at least one letter and one number.")]
+        [Required(ErrorMessage = "Password is required")]
+        [RegularExpression(
+        pattern: @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$",
+    ErrorMessage = "Password must be at least 6 characters and include at least one uppercase, one lowercase.")]
         [DataType(DataType.Password)]
-
         public string Password { get; set; } = string.Empty;
 
         [Compare("Password")]

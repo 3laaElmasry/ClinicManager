@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClinicManager.Core.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,8 @@ namespace ClinicManager.Core.DTO.User
         public string? Country { get; set; }
 
         public DateTime DateOfBirth { get; set; }
+
+        public enGender Gender { get; set; }
 
     }
 }
