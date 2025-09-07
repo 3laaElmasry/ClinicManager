@@ -76,6 +76,7 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 builder.Services.AddScoped<IJwtTokenGenrator, JwtTokenGenrator>();
 builder.Services.AddScoped<IPatientService, PatientService>();
+builder.Services.AddScoped<IDoctorService, DoctorService>();
 
 builder.Services.AddCors(options =>
 {
