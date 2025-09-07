@@ -16,5 +16,8 @@ namespace ClinicManager.Core.ServiceContracts
         Task<AuthResult> PatinetRegisterAsync(RegisterPatient model);
 
         Task<ApplicationUser?> CreateUserAsync(RegisterModel model);
+
+        Task<AuthResult> DoctorRegisterAsync(RegisterDoctor model);
+
     }
 }
