@@ -53,7 +53,7 @@ namespace ClinicManager.Core.Services
                 return new AuthResult
                 {
                     Success = false,
-                    Message = $"This is email {model.Email} is already registred try to log in"
+                    Message = $"This email {model.Email} is already registred try to log in"
                 };
             }
 
@@ -113,7 +113,7 @@ namespace ClinicManager.Core.Services
                 return new AuthResult
                 {
                     Success = false,
-                    Message = $"This is email {model.Email} is already registred try to log in"
+                    Message = $"This email {model.Email} is already registred try to log in"
                 };
             }
 
