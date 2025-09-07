@@ -47,6 +47,19 @@ namespace ClinicManager.API.Controllers
             return BadRequest(Result<AuthResult>.Failure(res.Message));
         }
 
+        [HttpPost]
+
+        public async Task<ActionResult<Result<AuthResult>>> LogIn(LoginModel model)
+        {
+            var res = await _authService.Login(model);
+
+            if (res.Success)
+            {
+                return Ok(Result<AuthResult>.SuccessResult(res));
+            }
+            return BadRequest(Result<AuthResult>.Failure(res.Message));
+        }
+
 
     }
 }

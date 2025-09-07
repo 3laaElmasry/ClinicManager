@@ -19,6 +19,7 @@ namespace ClinicManager.Core.Services
         {
             entity.Id = Guid.NewGuid();
             await _repository.AddAsync(entity);
+            await _repository.Save();
             return entity;
         }
 

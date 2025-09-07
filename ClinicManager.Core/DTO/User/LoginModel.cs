@@ -8,6 +8,6 @@ namespace ClinicManager.Core.DTO.User
 
         public string Password { get; set; } = string.Empty;
 
-        public bool RememberMe = false;
+        public bool RememberMe { get; set; }  = false;
     }
 }
