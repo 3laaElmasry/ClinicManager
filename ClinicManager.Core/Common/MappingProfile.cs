@@ -14,6 +14,9 @@ namespace ClinicManager.Core.Common
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
             CreateMap<RegisterPatient, Patient>();
 
+            CreateMap<RegisterDoctor, Doctor>();
+            CreateMap<RegisterDoctor, RegisterModel>();
+
         }
     }
 }
