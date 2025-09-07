@@ -19,12 +19,14 @@ namespace ClinicManager.Core.Services
         private readonly IPatientService _petientService;
         private readonly IDoctorService _doctorService;
         private readonly RoleManager<ApplicationRole> _roleManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         public AuthService(UserManager<ApplicationUser> userManager,
             IMapper mapper,
             IJwtTokenGenrator jwtTokenGenrator,
             IPatientService patientService,
             RoleManager<ApplicationRole> roleManager,
-            IDoctorService doctorService)
+            IDoctorService doctorService,
+            SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager;
             _mapper = mapper;
@@ -32,6 +34,7 @@ namespace ClinicManager.Core.Services
             _petientService = patientService;
             _roleManager = roleManager;
             _doctorService = doctorService;
+            _signInManager = signInManager;
         }
 
         public async Task<ApplicationUser?> CreateUserAsync(RegisterModel model)
@@ -93,9 +96,40 @@ namespace ClinicManager.Core.Services
             };
         }
 
-        public Task<AuthResult> Login(LoginModel model)
+        public async Task<AuthResult> Login(LoginModel model)
         {
-            throw new NotImplementedException();
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if(user is null)
+            {
+                return new AuthResult()
+                {
+                    Success = false,
+                    Message = $"This Email {model.Email} is not Exist Try to Register"
+                };
+            }
+            var res = await _signInManager.PasswordSignInAsync(
+                    userName: user.UserName?? "",
+                    password: model.Password,
+                    isPersistent: model.RememberMe,
+                    lockoutOnFailure: false
+                );
+            if(res.Succeeded is false)
+            {
+                return new AuthResult
+                {
+                    Success = false,
+                    Message = "User Name Or Password is Invalid!"
+                };
+            }
+
+            var token = await _jwtTokenGenrator.GenrateToken(user);
+
+            return new AuthResult
+            {
+                Success = true,
+                Token = token,
+                Message = "Login Was Succeded"
+            };
         }
 
         public Task<AuthResult> Logout()
