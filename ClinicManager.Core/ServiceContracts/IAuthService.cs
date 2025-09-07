@@ -13,11 +13,11 @@ namespace ClinicManager.Core.ServiceContracts
 
         Task<AuthResult> Logout();
 
-        Task<AuthResult> PatinetRegisterAsync(RegisterPatient model);
+        Task<AuthResult> PatinetRegisterAsync(PatientRegister model);
 
         Task<ApplicationUser?> CreateUserAsync(RegisterModel model);
 
-        Task<AuthResult> DoctorRegisterAsync(RegisterDoctor model);
+        Task<AuthResult> DoctorRegisterAsync(DoctorRegister model);
 
     }
 }

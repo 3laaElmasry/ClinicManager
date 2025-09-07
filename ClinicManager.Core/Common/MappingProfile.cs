@@ -9,13 +9,13 @@ namespace ClinicManager.Core.Common
     {
         public MappingProfile()
         {
-            CreateMap<RegisterPatient, RegisterModel>();
+            CreateMap<PatientRegister, RegisterModel>();
             CreateMap<RegisterModel, ApplicationUser>()
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
-            CreateMap<RegisterPatient, Patient>();
+            CreateMap<PatientRegister, Patient>();
 
-            CreateMap<RegisterDoctor, Doctor>();
-            CreateMap<RegisterDoctor, RegisterModel>();
+            CreateMap<DoctorRegister, Doctor>();
+            CreateMap<DoctorRegister, RegisterModel>();
 
         }
     }

@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ClinicManager.Core.DTO.User
 {
-    public class RegisterDoctor
+    public class DoctorRegister
     {
         [Required(ErrorMessage = "Full Name is required")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Full Name must be between {1} and {0} characters")]

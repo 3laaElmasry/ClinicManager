@@ -43,7 +43,7 @@ namespace ClinicManager.Core.Services
             return (res.Succeeded == true) ? user : null;
         }
 
-        public async Task<AuthResult> DoctorRegisterAsync(RegisterDoctor model)
+        public async Task<AuthResult> DoctorRegisterAsync(DoctorRegister model)
         {
 
             var userFromDb = await _userManager.FindByEmailAsync(model.Email);
@@ -103,7 +103,7 @@ namespace ClinicManager.Core.Services
             throw new NotImplementedException();
         }
 
-        public async Task<AuthResult> PatinetRegisterAsync(RegisterPatient model)
+        public async Task<AuthResult> PatinetRegisterAsync(PatientRegister model)
         {
 
             var userFromDb = await _userManager.FindByEmailAsync(model.Email);

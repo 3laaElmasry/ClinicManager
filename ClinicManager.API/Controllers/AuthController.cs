@@ -19,13 +19,28 @@ namespace ClinicManager.API.Controllers
         }
 
         [HttpPost("PatientRegister")]
-        public async Task<ActionResult<Result<AuthResult>>> PatientRegisterAsync([FromBody] RegisterPatient model)
+        public async Task<ActionResult<Result<AuthResult>>> PatientRegisterAsync([FromBody] PatientRegister model)
         {
             var res = await _authService.PatinetRegisterAsync(model);
 
             if(res.Success)
             {
                 return  Ok(Result<AuthResult>.SuccessResult(res));
+
+            }
+
+            return BadRequest(Result<AuthResult>.Failure(res.Message));
+        }
+
+
+        [HttpPost("DoctorRegister")]
+        public async Task<ActionResult<Result<AuthResult>>> DoctorRegisterAsync([FromBody] DoctorRegister model)
+        {
+            var res = await _authService.DoctorRegisterAsync(model);
+
+            if (res.Success)
+            {
+                return Ok(Result<AuthResult>.SuccessResult(res));
 
             }
 

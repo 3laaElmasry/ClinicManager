@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ClinicManager.Core.DTO.User
 {
-    public class RegisterPatient
+    public class PatientRegister
     {
 
 
