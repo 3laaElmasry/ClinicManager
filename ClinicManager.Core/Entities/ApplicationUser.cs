@@ -15,5 +15,8 @@ namespace ClinicManager.Core.Entities
 
         public int Age => DateTime.Now.Year - DateOfBirth.Year -
             (DateTime.Now.DayOfYear < DateOfBirth.DayOfYear ? 1 : 0);
+
+
+        public List<RefreshToken>? RefreshTokens { get; set; }
     }
 }
