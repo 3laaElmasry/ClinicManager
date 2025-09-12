@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace ClinicManager.Core.Services
@@ -48,15 +49,48 @@ namespace ClinicManager.Core.Services
                     signingCredentials : cred
                 );
 
-            var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+            var accessToken = new JwtSecurityTokenHandler().WriteToken(token);
 
-
-            return new AuthResult()
+            var authRes = new AuthResult
             {
-                Token = tokenString,
-                ExpirationDate = exp,
-                Success = true
+                AccessToken = accessToken,
+                AccessTokenExpiration = exp,
             };
+
+            if(user.RefreshTokens is not null && user.RefreshTokens.Any(r => r.IsActive))
+            {
+                var activeRefreshToken = user.RefreshTokens.FirstOrDefault()!;
+                authRes.RefreshToken = activeRefreshToken.Token;
+                authRes.RefreshTokenExpiration = activeRefreshToken.ExpiresOn;
+            }
+            else
+            {
+                RefreshToken refresToken = GetRefreshToken();
+                authRes.RefreshToken = refresToken.Token;
+                authRes.RefreshTokenExpiration = refresToken.ExpiresOn;
+
+                user.RefreshTokens?.Add(refresToken);
+                await _userManager.UpdateAsync(user);
+
+            }
+
+            return authRes;
+
+        }
+
+        public RefreshToken GetRefreshToken()
+        {
+            var randomNumber = new byte[32];
+
+            RandomNumberGenerator.Fill(randomNumber);
+
+            return new RefreshToken
+            {
+                Token = Convert.ToBase64String(randomNumber),
+                ExpiresOn = DateTime.UtcNow.AddDays(20),
+                CreatedOn = DateTime.UtcNow,
+            };
+
         }
     }
 }

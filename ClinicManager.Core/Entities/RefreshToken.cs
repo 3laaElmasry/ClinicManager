@@ -9,9 +9,9 @@ namespace ClinicManager.Core.Entities
     {
         public string Token { get; set; } = string.Empty;
 
-        public DateTime Expiration { get; set; }
+        public DateTime ExpiresOn { get; set; }
 
-        public bool IsExpired => DateTime.UtcNow >= Expiration;
+        public bool IsExpired => DateTime.UtcNow >= ExpiresOn;
 
         public DateTime CreatedOn { get; set; }
 

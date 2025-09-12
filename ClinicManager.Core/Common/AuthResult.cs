@@ -6,12 +6,15 @@ namespace ClinicManager.Core.Common
 {
     public class AuthResult
     {
-        public string Token { get; set; } = string.Empty;
+        public string? AccessToken { get; set; }
 
         public bool Success { get; set; }
 
+        public string? RefreshToken { get; set; }
 
-        public DateTime ExpirationDate { get; set; }
+        public DateTime? AccessTokenExpiration { get; set; }
+        public DateTime? RefreshTokenExpiration { get; set; }
+
 
         [JsonIgnore]
         public string Message = string.Empty;

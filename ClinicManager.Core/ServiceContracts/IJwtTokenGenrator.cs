@@ -8,5 +8,6 @@ namespace ClinicManager.Core.ServiceContracts
     public interface IJwtTokenGenrator
     {
         Task<AuthResult> GenrateToken(ApplicationUser user);
+        RefreshToken GetRefreshToken();
     }
 }
