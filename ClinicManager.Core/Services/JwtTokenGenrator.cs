@@ -3,7 +3,6 @@
 using ClinicManager.Core.Common;
 using ClinicManager.Core.Entities;
 using ClinicManager.Core.ServiceContracts;
-using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -23,7 +22,7 @@ namespace ClinicManager.Core.Services
             _jwtSettings = jwtSettings.Value;
             _userManager = userManager;
         }
-        public async Task<string> GenrateToken(ApplicationUser user)
+        public async Task<AuthResult> GenrateToken(ApplicationUser user)
         {
             var userRoles = await _userManager.GetRolesAsync(user);
 
@@ -48,9 +47,16 @@ namespace ClinicManager.Core.Services
                     expires: exp,
                     signingCredentials : cred
                 );
-           
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+
+
+            return new AuthResult()
+            {
+                Token = tokenString,
+                ExpirationDate = exp,
+                Success = true
+            };
         }
     }
 }

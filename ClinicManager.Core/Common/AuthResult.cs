@@ -1,5 +1,7 @@
 ﻿
 
+using System.Text.Json.Serialization;
+
 namespace ClinicManager.Core.Common
 {
     public class AuthResult
@@ -8,6 +10,10 @@ namespace ClinicManager.Core.Common
 
         public bool Success { get; set; }
 
+
+        public DateTime ExpirationDate { get; set; }
+
+        [JsonIgnore]
         public string Message = string.Empty;
     }
 

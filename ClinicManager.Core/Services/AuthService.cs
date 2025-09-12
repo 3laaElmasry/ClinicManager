@@ -67,7 +67,7 @@ namespace ClinicManager.Core.Services
             if (user is not null)
             {
                 await _userManager.AddToRoleAsync(user, enRole.Doctor.ToString());
-                var token = await _jwtTokenGenrator.GenrateToken(user);
+                var authRes = await _jwtTokenGenrator.GenrateToken(user);
 
                 var Doctor = new Doctor
                 {
@@ -76,14 +76,8 @@ namespace ClinicManager.Core.Services
 
                 };
                 await _doctorService.AddAsync(Doctor);
-
-                return new AuthResult
-                {
-                    Success = true,
-                    Token = token,
-                    Message = "Register Succeded"
-
-                };
+                authRes.Message = "Registerd Was Succeded";
+                return authRes;
 
 
 
@@ -122,14 +116,11 @@ namespace ClinicManager.Core.Services
                 };
             }
 
-            var token = await _jwtTokenGenrator.GenrateToken(user);
+            var authRes = await _jwtTokenGenrator.GenrateToken(user);
+            authRes.Message = "Login Was Succeded";
+            return authRes;
 
-            return new AuthResult
-            {
-                Success = true,
-                Token = token,
-                Message = "Login Was Succeded"
-            };
+           
         }
 
         public Task<AuthResult> Logout()
@@ -158,7 +149,7 @@ namespace ClinicManager.Core.Services
             if (user is not null)
             {
                 await _userManager.AddToRoleAsync(user, enRole.Patient.ToString());
-                var token = await _jwtTokenGenrator.GenrateToken(user);
+                var authRes = await _jwtTokenGenrator.GenrateToken(user);
 
                 var patient = new Patient
                 {
@@ -168,16 +159,8 @@ namespace ClinicManager.Core.Services
                 };
                 await _petientService.AddAsync(patient);
 
-                return new AuthResult
-                {
-                    Success = true,
-                    Token = token,
-                    Message = "Register Succeded"
-
-                };
-
-
-
+                authRes.Message = "Registers Was Succeded";
+                return authRes;
             }
 
             return new AuthResult
