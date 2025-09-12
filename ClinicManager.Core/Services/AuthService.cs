@@ -68,7 +68,6 @@ namespace ClinicManager.Core.Services
             if (user is not null)
             {
                 await _userManager.AddToRoleAsync(user, enRole.Doctor.ToString());
-                var authRes = await _jwtTokenGenrator.GenrateToken(user);
 
                 var Doctor = new Doctor
                 {
@@ -77,6 +76,9 @@ namespace ClinicManager.Core.Services
 
                 };
                 await _doctorService.AddAsync(Doctor);
+
+                var authRes = await _jwtTokenGenrator.GenrateToken(user);
+
                 authRes.Message = "Registerd Was Succeded";
                 return authRes;
 
@@ -150,7 +152,6 @@ namespace ClinicManager.Core.Services
             if (user is not null)
             {
                 await _userManager.AddToRoleAsync(user, enRole.Patient.ToString());
-                var authRes = await _jwtTokenGenrator.GenrateToken(user);
 
                 var patient = new Patient
                 {
@@ -159,6 +160,8 @@ namespace ClinicManager.Core.Services
 
                 };
                 await _petientService.AddAsync(patient);
+
+                var authRes = await _jwtTokenGenrator.GenrateToken(user);
 
                 authRes.Message = "Registers Was Succeded";
                 return authRes;

@@ -55,6 +55,7 @@ namespace ClinicManager.Core.Services
             {
                 AccessToken = accessToken,
                 AccessTokenExpiration = exp,
+                
             };
 
             if(user.RefreshTokens is not null && user.RefreshTokens.Any(r => r.IsActive))
@@ -73,7 +74,7 @@ namespace ClinicManager.Core.Services
                 await _userManager.UpdateAsync(user);
 
             }
-
+            authRes.Success = true;
             return authRes;
 
         }
