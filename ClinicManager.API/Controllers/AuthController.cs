@@ -23,9 +23,9 @@ namespace ClinicManager.API.Controllers
         {
             var res = await _authService.PatinetRegisterAsync(model);
 
-            if(res.Success)
+            if (res.Success)
             {
-                return  Ok(Result<AuthResult>.SuccessResult(res));
+                return Ok(Result<AuthResult>.SuccessResult(res, res.Message));
 
             }
 
@@ -40,7 +40,8 @@ namespace ClinicManager.API.Controllers
 
             if (res.Success)
             {
-                return Ok(Result<AuthResult>.SuccessResult(res));
+                return Ok(Result<AuthResult>.SuccessResult(res, res.Message));
+
 
             }
 
@@ -55,7 +56,8 @@ namespace ClinicManager.API.Controllers
 
             if (res.Success)
             {
-                return Ok(Result<AuthResult>.SuccessResult(res));
+                return Ok(Result<AuthResult>.SuccessResult(res, res.Message));
+
             }
             return BadRequest(Result<AuthResult>.Failure(res.Message));
         }
