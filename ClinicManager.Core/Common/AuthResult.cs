@@ -10,6 +10,7 @@ namespace ClinicManager.Core.Common
 
         public bool Success { get; set; }
 
+        [JsonIgnore]
         public string? RefreshToken { get; set; }
 
         public DateTime? AccessTokenExpiration { get; set; }

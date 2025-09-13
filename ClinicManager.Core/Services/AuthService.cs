@@ -6,9 +6,7 @@ using ClinicManager.Core.DTO.User;
 using ClinicManager.Core.Entities;
 using ClinicManager.Core.Enums;
 using ClinicManager.Core.ServiceContracts;
-using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Identity;
-using System.Security.Cryptography;
 
 namespace ClinicManager.Core.Services
 {
@@ -172,21 +170,6 @@ namespace ClinicManager.Core.Services
                 Success = false,
                 Message = "Fild To Register"
             };
-        }
-
-        private RefreshToken GetRefreshToken()
-        {
-            var randomNumber = new byte[32];
-
-            RandomNumberGenerator.Fill(randomNumber);
-
-            return new RefreshToken
-            {
-                Token = Convert.ToBase64String(randomNumber),
-                ExpiresOn = DateTime.UtcNow.AddDays(20),
-                CreatedOn = DateTime.UtcNow,
-            };
-
         }
     }
 }
