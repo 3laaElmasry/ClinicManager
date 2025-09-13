@@ -71,6 +71,27 @@ namespace ClinicManager.API.Controllers
             return BadRequest(Result<AuthResult>.Failure(res.Message));
         }
 
+        [HttpGet]
+        public async Task<ActionResult<Result<AuthResult>>> RefreshTokenAsync()
+        {
+            var requestRefreshToken = Request.Cookies["refToken"];
+
+            if (String.IsNullOrEmpty(requestRefreshToken))
+            {
+                return BadRequest(Result<AuthResult>.Failure("Missed Refresh Token Cookie"));
+            }
+            var res = await _authService.RefreshTokenAync(requestRefreshToken);
+
+            if (!res.Success)
+            {
+                return BadRequest(Result<AuthResult>.Failure(res.Message));
+            }
+
+
+            SetRefreshTokenInCookie(res.RefreshToken!, res.RefreshTokenExpiration!.Value);
+            return Ok(Result<AuthResult>.SuccessResult(res, res.Message));
+        }
+
         private void SetRefreshTokenInCookie(string refreshToken , DateTime expDate)
         {
             var cookieOptions = new CookieOptions()

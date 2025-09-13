@@ -193,6 +193,7 @@ namespace ClinicManager.Core.Services
             }
 
             refreshTokenFromUser.RevokeOn = DateTime.UtcNow;
+            await _userManager.UpdateAsync(user);
 
             authRes = await _jwtTokenGenrator.GenrateToken(user);
             authRes.Message = "Refresh Token Created Successfully";
