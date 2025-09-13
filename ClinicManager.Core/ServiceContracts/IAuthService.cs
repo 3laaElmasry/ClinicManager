@@ -19,5 +19,6 @@ namespace ClinicManager.Core.ServiceContracts
 
         Task<AuthResult> DoctorRegisterAsync(DoctorRegister model);
 
+        Task<AuthResult> RefreshTokenAync(string refreshToken);
     }
 }

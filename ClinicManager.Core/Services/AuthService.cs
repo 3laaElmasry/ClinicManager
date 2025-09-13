@@ -7,6 +7,7 @@ using ClinicManager.Core.Entities;
 using ClinicManager.Core.Enums;
 using ClinicManager.Core.ServiceContracts;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClinicManager.Core.Services
 {
@@ -170,6 +171,32 @@ namespace ClinicManager.Core.Services
                 Success = false,
                 Message = "Fild To Register"
             };
+        }
+
+        public async Task<AuthResult> RefreshTokenAync(string refreshToken)
+        {
+            var authRes = new AuthResult();
+            var user = await _userManager.Users.SingleOrDefaultAsync(u => u.RefreshTokens!.Any(r => r.Token == refreshToken));
+
+            if(user is null)
+            {
+                authRes.Message = "Invalid Token";
+                return authRes;
+            }
+
+            RefreshToken refreshTokenFromUser = user.RefreshTokens!.First();
+
+            if (!refreshTokenFromUser.IsActive)
+            {
+                authRes.Message = "Inactive Token";
+                return authRes;
+            }
+
+            refreshTokenFromUser.RevokeOn = DateTime.UtcNow;
+
+            authRes = await _jwtTokenGenrator.GenrateToken(user);
+            authRes.Message = "Refresh Token Created Successfully";
+            return authRes;
         }
     }
 }
