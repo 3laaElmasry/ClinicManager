@@ -92,6 +92,23 @@ namespace ClinicManager.API.Controllers
             return Ok(Result<AuthResult>.SuccessResult(res, res.Message));
         }
 
+        [HttpPost("revoke-token")]
+
+        public async Task<ActionResult<Result<bool>>> RevokeTokenAsync([FromBody] string? refreshToken)
+        {
+            var token = refreshToken ?? Request.Cookies["refToken"];
+            if (string.IsNullOrEmpty(token))
+            {
+                return BadRequest(Result<bool>.Failure("Token is required"));
+            }
+            var res = await _authService.RevokeRefreshTokenAsync(token);
+
+            if (!res)
+                return BadRequest(Result<bool>.Failure("Token is invalid"));
+
+            return Ok(Result<bool>.SuccessResult(res,"Token revoked Succefully"));
+        }
+
         private void SetRefreshTokenInCookie(string refreshToken , DateTime expDate)
         {
             var cookieOptions = new CookieOptions()
