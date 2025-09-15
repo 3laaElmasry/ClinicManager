@@ -199,5 +199,24 @@ namespace ClinicManager.Core.Services
             authRes.Message = "Refresh Token Created Successfully";
             return authRes;
         }
+
+        public async Task<bool> RevokeRefreshTokenAsync(string refreshToken)
+        {
+
+            var user = await _userManager.Users.SingleOrDefaultAsync(u => u.RefreshTokens!.Any(r => r.Token == refreshToken));
+
+            if (user is null)
+                return false;
+            
+
+            RefreshToken refreshTokenFromUser = user.RefreshTokens!.First();
+
+            if (!refreshTokenFromUser.IsActive)
+                return false;
+
+            refreshTokenFromUser.RevokeOn = DateTime.UtcNow;
+            await _userManager.UpdateAsync(user);
+            return true;
+        }
     }
 }
