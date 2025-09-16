@@ -109,6 +109,25 @@ namespace ClinicManager.API.Controllers
             return Ok(Result<bool>.SuccessResult(res,"Token revoked Succefully"));
         }
 
+        [HttpPost("logOut")]
+
+        public async Task<ActionResult<Result<bool>>> LogOutAsync([FromBody]string? refToken)
+        {
+            var token = refToken ?? Request.Cookies["refToken"];
+
+            if (string.IsNullOrEmpty(token))
+            {
+                return BadRequest(Result<bool>.Failure("Token is required"));
+            }
+            var res = await _authService.LogoutAsync(token);
+
+            if (!res)
+                return BadRequest(Result<bool>.Failure("Token is invalid"));
+
+            return Ok(Result<bool>.SuccessResult(res, "Logout Succeded"));
+        }
+
+
         private void SetRefreshTokenInCookie(string refreshToken , DateTime expDate)
         {
             var cookieOptions = new CookieOptions()
@@ -118,6 +137,11 @@ namespace ClinicManager.API.Controllers
             };
 
             Response.Cookies.Append("refToken",refreshToken, cookieOptions);
+        }
+
+        private void DeleteRefreshTokenInCookie()
+        {
+            Response.Cookies.Delete("refToken");
         }
     }
 }
