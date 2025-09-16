@@ -125,9 +125,20 @@ namespace ClinicManager.Core.Services
            
         }
 
-        public Task<AuthResult> Logout()
+        public async Task<bool> LogoutAsync(string refToken)
         {
-            throw new NotImplementedException();
+
+            var user = await _userManager
+                .Users
+                .SingleAsync(u => u.RefreshTokens!.Any(t => t.Token == refToken));
+            if(user is null)
+            {
+                return false;
+            }
+            user.RefreshTokens?.Clear();
+            await _userManager.UpdateAsync(user);
+            return true;
+
         }
 
         public async Task<AuthResult> PatinetRegisterAsync(PatientRegister model)

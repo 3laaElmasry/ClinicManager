@@ -11,7 +11,7 @@ namespace ClinicManager.Core.ServiceContracts
     {
         Task<AuthResult> Login(LoginModel model);
 
-        Task<AuthResult> Logout();
+        Task<bool> LogoutAsync(string refToken);
 
         Task<AuthResult> PatinetRegisterAsync(PatientRegister model);
 
