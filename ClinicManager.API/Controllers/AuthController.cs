@@ -112,7 +112,7 @@ namespace ClinicManager.API.Controllers
         [HttpPost("logOut")]
 
         public async Task<ActionResult<Result<bool>>> LogOutAsync([FromBody]string? refToken)
-        {
+            {
             var token = refToken ?? Request.Cookies["refToken"];
 
             if (string.IsNullOrEmpty(token))
